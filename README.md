@@ -124,3 +124,22 @@ the URL shortener. `test/testURLs.md` collects URLs useful for manual checks.
 ## License
 
 MIT
+
+## Testing local v10 files
+
+This checkout uses `file:../juicebox.js`, whose local Straw dependency is
+`file:../hic-straw-js`. Build the three sibling checkouts in that order after
+installing each one's dependencies; see the local v10 development section in
+`../juicebox.js/README.md`. Rebuild Juicebox after changing its source, then run
+`npm run dev` here and use **Contact Map → Local File** to select a `.hic` file.
+The URL loader also supports v10 when the server permits HTTP byte ranges and
+cross-origin reads.
+
+`hct_1B.v10.hic` has no All chromosome, so its initial view is chr1 at 2.5 Mb.
+Check chromosome selection (including chr1/chr2), resolution changes, panning,
+normalization, and both cis triangles. The same viewer continues to load legacy
+`.hic` files. `npm test`, `npm run build`, and `npm run build:aidenlab` verify code
+and packaging without accessing a browser or screen.
+
+The local dependency links require sibling checkouts. Independent hosted builds
+need published or pinned v10-capable dependencies before deployment.
