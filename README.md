@@ -143,3 +143,12 @@ and packaging without accessing a browser or screen.
 
 The local dependency links require sibling checkouts. Independent hosted builds
 need published or pinned v10-capable dependencies before deployment.
+
+
+Stored scaled All support comes from the sibling Juicebox and Straw packages.
+After changing the reader, build `hic-straw-js`, then `juicebox.js`, then this
+application so the generated site includes the new metadata and display logic.
+V10 maps with appended All open their useful finest overview level; no
+browser-side reconstruction is performed. Real chromosome IDs and resolutions
+are preserved. Code tests use simulated DOM and pixel buffers; interactive
+website checks can be performed against the resulting `dist/index.html`.
