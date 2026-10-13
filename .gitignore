@@ -1,6 +1,5 @@
 /.idea/
 /node_modules/
-/dist/
 /dist-aidenlab/
 /juicebox-web.iml
 /deploy.sh
