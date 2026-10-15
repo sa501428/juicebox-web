@@ -1,0 +1,1 @@
+import{n as e,t}from"./juicebox-CQx2M47w.js";document.addEventListener(`DOMContentLoaded`,async()=>{await t(),e.init(document.getElementById(`app-container`),{})});
