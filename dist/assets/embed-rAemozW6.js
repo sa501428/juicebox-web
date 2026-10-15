@@ -1,1 +1,0 @@
-import{n as e,t}from"./juicebox-XxrIyZ30.js";document.addEventListener(`DOMContentLoaded`,async()=>{await t(),e.init(document.getElementById(`app-container`),{})});
