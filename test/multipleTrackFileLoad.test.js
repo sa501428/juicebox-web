@@ -5,7 +5,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 vi.mock('../js/alertSingleton.js', () => ({ AlertSingleton: { present: vi.fn() } }))
 
 import { AlertSingleton } from '../js/alertSingleton.js'
-import { ingestPaths } from '../js/widgets/multipleTrackFileLoad.js'
+import MultipleTrackFileLoad, { ingestPaths } from '../js/widgets/multipleTrackFileLoad.js'
 
 /** The configs the loader would hand to juicebox.js for these paths, or undefined if it handed none. */
 async function configsFor(paths) {
@@ -17,6 +17,30 @@ async function configsFor(paths) {
 beforeEach(() => {
     vi.spyOn(console, 'error').mockImplementation(() => {})
     AlertSingleton.present.mockClear()
+})
+
+describe('local track file picker', () => {
+    it('enables picking multiple BED files and loads every selected file', async () => {
+        const input = document.createElement('input')
+        input.type = 'file'
+        const fileLoadHandler = vi.fn()
+        new MultipleTrackFileLoad({
+            localFileInput: input,
+            fileLoadHandler,
+            multipleFileSelection: true
+        })
+
+        expect(input.multiple).toBe(true)
+
+        const files = [new File(['chr1\t0\t100\n'], 'first.bed'), new File(['chr1\t100\t200\n'], 'second.bed')]
+        const transfer = new DataTransfer()
+        files.forEach(file => transfer.items.add(file))
+        input.files = transfer.files
+        input.dispatchEvent(new Event('change'))
+
+        await vi.waitFor(() => expect(fileLoadHandler).toHaveBeenCalledExactlyOnceWith(files.map(url => ({ url }))))
+        expect(input.value).toBe('')
+    })
 })
 
 /**

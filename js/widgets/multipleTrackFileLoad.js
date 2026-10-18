@@ -12,6 +12,8 @@ class MultipleTrackFileLoad {
 
         this.fileLoadHandler = fileLoadHandler
 
+        localFileInput.multiple = multipleFileSelection === true
+
         localFileInput.addEventListener('change', async () => {
             if (MultipleTrackFileLoad.isValidLocalFileInput(localFileInput)) {
                 const paths = Array.from(localFileInput.files)
